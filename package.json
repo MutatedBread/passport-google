@@ -1,0 +1,17 @@
+{
+  "name": "test-google-auth",
+  "version": "1.0.0",
+  "description": "app to test passport google oauth2",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "Ng Chen Hon",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.15.2",
+    "passport-google-oauth-2": "^0.1.1",
+    "redis": "^2.7.1"
+  }
+}
