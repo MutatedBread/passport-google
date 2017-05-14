@@ -1,5 +1,6 @@
 var googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var authConfig = require('./auth');
+var Promise = require('promise');
 var db = require('../app/db');
 
 var passportConfig = function(passport){
