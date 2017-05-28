@@ -54,7 +54,8 @@ const RedisPromisified = {
 };
 
 module.exports = RedisPromisified;
-//console.log(redisPromisified.hgetall());
-//redisPromisified.hgetall(12).then(console.log);
-//redisPromisified.hgetall().then((res) => {console.log(res);});
-//redisPromisified.hmset(13, {1:123, 2:32312}).then(console.log);
+//console.log(RedisPromisified.hgetall());
+//RedisPromisified.hgetall().then((res) => {console.log(res);});
+//RedisPromisified.hmset(13, {1:123, 2:32312}).then(console.log);
+//RedisPromisified.hmset(13, {2:31}).then(console.log);
+//RedisPromisified.hgetall(13).then(console.log);

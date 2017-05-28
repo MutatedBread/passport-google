@@ -9,7 +9,7 @@ const db = {
         return new Promise((fulfill, reject) => {
             RedisPromisified.hgetall(id).then(
                 (res) => {
-                    if(res !== 0)
+                    if(res !== null)
                         fulfill(dbStatusMaker(dbOperation.FIND_USER, true, res));
                     else
                         fulfill(dbStatusMaker(dbOperation.FIND_USER, false, dbMessage.USER_NOT_EXIST));
@@ -21,18 +21,20 @@ const db = {
         });
     },
     
-    newUser: function(id, token, email, name) {
+    makeUser: function(id, token, email, name, pictureURL) {
         return new Promise((fulfill, reject) => {
             RedisPromisified.hmset(id, {
-                'google.email': email,
-                'google.name': name,
-                'google.token': token
+                'google-id': id,
+                'google-email': email,
+                'google-name': name,
+                'google-token': token,
+                'google-picture': pictureURL
             }).then(
                 (res) => {
                     if(res === 'OK')
-                        fulfill(dbStatusMaker(dbOperation.ADD_USER, true, dbMessage.USER_ADDED));
+                        fulfill(dbStatusMaker(dbOperation.ADD_USER, true, dbMessage.USER_MADE));
                     else
-                        fulfill(dbStatusMaker(dbOperation.ADD_USER, false, dbMessage.USER_NOT_ADDED));
+                        fulfill(dbStatusMaker(dbOperation.ADD_USER, false, dbMessage.USER_NOT_MADE));
                 },
                 (err) => {
                     reject(dbStatusMaker(dbOperation.ADD_USER, false, dbMessage.DB_FAILED));
@@ -72,6 +74,23 @@ const db = {
             )
         });
     },
+
+    renewToken: function(id, token) {
+        return new Promise((fulfill, reject) => {
+            RedisPromisified.hmset(id, {'google-token': token}).then(
+                (res) => {
+                    if(res === 'OK') {
+                        fulfill(dbStatusMaker(dbOperation.RENEW_TOKEN, true, dbMessage.TOKEN_RENEWED));
+                    } else {
+                        fulfill(dbStatusMaker(dbOperation.RENEW_TOKEN, false, dbMessage.TOKEN_NOT_RENEWED));
+                    }
+                },
+                (err) => {
+                    reject(dbStatusMaker(dbOperation.RENEW_TOKEN, false, dbMessage.DB_FAILED));
+                }
+            );
+        });
+    }
 };
 /*
 db.findUser(233).then(console.log, console.log);

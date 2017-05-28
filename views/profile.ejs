@@ -1,0 +1,32 @@
+<doctype html!>
+<html>
+    <style>
+        a{
+            color: black;
+        }
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+            
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+    <body>
+        <h1>You are logined ! </h1>
+        <h2>Welcome back, <%= user['google-name'] %> </h2>
+        <h3>Your email is <%= user['google-email'] %> </h3>
+        <h3> Your profile picture : </h3>
+        <img src = <%= user['google-picture'] %> />
+        <button><a href='/logout'>Logout</a></button>
+    </body>
+</html>
