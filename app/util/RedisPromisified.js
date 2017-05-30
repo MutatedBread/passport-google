@@ -1,6 +1,6 @@
 const redis = require('redis');
 const Promise = require('promise');
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_URL);
 
 client.on('connect', function() {
     console.log('db conencted');

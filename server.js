@@ -12,7 +12,7 @@ const passportConfig = require('./config/passport.js');
 let app = express();
 
 app.use(session({
-    store: new RedisStore({ client: redis.createClient() }),
+    store: new RedisStore({ client: redis.createClient(process.env.REDIS_URL) }),
     secret: 'learninghowtousepassporjsgoogle',
     name: 'passport_google',
     cookies: {
